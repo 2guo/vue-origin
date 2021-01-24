@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 2.x reactive</title>
+    <script src="./my-vue.js"></script>
+    <style>
+      img {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{ person.name }} --- {{ person.gender }}</h3>
+      <p>{{ person.age }}</p>
+      <p>兴趣爱好</p>
+      <ul>
+        <li>摄影</li>
+        <li>视频剪辑</li>
+        <li>马拉松</li>
+      </ul>
+      <p>{{ message }}</p>
+      <p v-text="message"></p>
+      <p v-html="htmlStr"></p>
+      <input type="text" v-model="message" />
+      <button v-on:click="handleClick">v-on click</button>
+      <button @click="handleClick">@ click</button>
+      <hr />
+      <div>
+        <img v-bind:src="catImg01" />
+        <img :src="catImg02" />
+      </div>
+    </div>
+    <script>
+      const catImg01 =
+        'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2F20171109%2F35ad-fynstfh2436792.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613632467&t=d4a13696bdfb16f274bd71bd2aea26af'
+      const catImg02 =
+        'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3556077084,1854364024&fm=26&gp=0.jpg'
+
+      const vm = new MyVue({
+        el: '#app',
+        data: {
+          person: {
+            name: 'Anson',
+            gender: '男',
+            age: 24,
+          },
+          message: '这是一个message消息',
+          htmlStr: '<span style="color: red">v-html测试</span>',
+          catImg01,
+          catImg02,
+        },
+        methods: {
+          handleClick() {
+            console.log(this)
+            // this.$data.person.name = 'Guo'
+            this.person.name = 'guo'
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
